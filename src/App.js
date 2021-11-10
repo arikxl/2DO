@@ -1,4 +1,3 @@
-// import axios from 'axios';
 import { useState, useEffect } from 'react';
 import todos from './apis';
 
@@ -16,24 +15,24 @@ function App() {
 
   useEffect(() => {
     async function fetchData(){
-      const { data } = await todos.get("/todos");
+      const { data } = await todos.get("todos/");
       setTodoList(data);
     }
     fetchData();
   },[]);
 
   const addTodo = async (item) => {
-    const { data } = await todos.post("/todos", item);
+    const { data } = await todos.post("todos/", item);
     setTodoList((oldList) => [...oldList, data]);
   };
 
   const removeTodo = async (id) => {
-    await todos.delete(`/todos/${id}`);
+    await todos.delete(`todos/${id}`);
     setTodoList((oldList) => oldList.filter((item) => item._id !== id));
   };
 
   const editTodo = async (id, item) => {
-    await todos.put(`/todos/${id}`, item);
+    await todos.put(`todos/${id}`, item);
   }
 
 
